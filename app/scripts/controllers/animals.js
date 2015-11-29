@@ -1,7 +1,11 @@
 angular.module("zooApp", [])
-.factory("factory", function(){
+.factory("factoryZoo", function(){
   return {
-    serviceAnimals: new Zoo(),
+    zoo: new Zoo()
+  };
+})
+.factory("factoryChat", function(){
+  return {
     chat: new function() {
             var messages = ["|", "|", "|", "|", "|"];
             this.getChat = function(){
@@ -14,55 +18,54 @@ angular.module("zooApp", [])
           }
   };
 })
-.directive("animalLive", ["factory", "$interval", function(factory, $interval) {
+.directive("animalLive", ["factoryZoo", "factoryChat", "$interval", function(factoryZoo, factoryChat, $interval) {
   return {
     link: function(scope) {
-        scope.serviceAnimals = factory.serviceAnimals;
-        scope.chat = factory.chat;
+        scope.zoo = factoryZoo.zoo;
+        scope.chat = factoryChat.chat;
 
-        scope.killAnimalCarnivores = function(animal) {//to Zoo
+        scope.killAnimalCarnivores = function(animal) {
           var message = animal.getName() + MessageAnimal.KILL;
           scope.chat.addMessage(message);
 
           scope.deadAnimalCarnivores(animal);
         };
-        scope.killAnimalHerbivorus = function(animal) {//to Zoo
+        scope.killAnimalHerbivorus = function(animal) {
           var message = animal.getName() + ": No! You kill me!";
           scope.chat.addMessage(message);
 
-          scope.serviceAnimals.removeAnimalHerbivorus(animal);
+          scope.deadAnimalHerbivorus(animal);
         };
 
-        scope.deadAnimalCarnivores = function(animal) {//to Zoo
-          scope.serviceAnimals.removeAnimalCarnivores(animal);
+        scope.deadAnimalCarnivores = function(animal) {
+          scope.zoo.removeAnimalCarnivores(animal);
         }
 
-        scope.deadAnimalHerbivorus = function(animal) {//to Zoo
-          scope.serviceAnimals.removeAnimalHerbivorus(animal);
+        scope.deadAnimalHerbivorus = function(animal) {
+          scope.zoo.removeAnimalHerbivorus(animal);
         }
 
         scope.food = function(animal){
           var message = animal.getName() + MessageAnimal.FOOD;
           scope.chat.addMessage(message);
 
-          scope.serviceAnimals.foodAnimal(animal);
+          scope.zoo.foodAnimal(animal);
         }
 
         scope.timer = $interval(function(){
-          for (animal of scope.serviceAnimals.getCarnivoresList()) {
+          for (animal of scope.zoo.getCarnivoresList()) {
             animal.addTimeAppetiteCurrent();
-            if (scope.serviceAnimals.isCorpse(animal)){
+            if (scope.zoo.isCorpse(animal)){
               var message = animal.getName() + MessageAnimal.DIED_STARVATION;
               scope.chat.addMessage(message);
               scope.deadAnimalCarnivores(animal);
             }
           }
-          for (animal of scope.serviceAnimals.getHerbivorusList()) {
+          for (animal of scope.zoo.getHerbivorusList()) {
             animal.addTimeAppetiteCurrent();
-            if (scope.serviceAnimals.isCorpse(animal)){
+            if (scope.zoo.isCorpse(animal)){
               var message = animal.getName() + MessageAnimal.DIED_STARVATION;
               scope.chat.addMessage(message);
-              scope.deadAnimalCarnivores(animal);
               scope.deadAnimalHerbivorus(animal);
             }
           }
@@ -72,11 +75,11 @@ angular.module("zooApp", [])
     templateUrl: 'views/animalLive.html'
   }
 }])
-.directive("administrationZoo", ["factory", function(factory) {
+.directive("administrationZoo", ["factoryZoo", "factoryChat", function(factoryZoo, factoryChat) {
   return {
     link: function(scope) {
-        scope.serviceAnimals = factory.serviceAnimals;
-        scope.chat = factory.chat;
+      scope.zoo = factoryZoo.zoo;
+      scope.chat = factoryChat.chat;
 
         scope.types = [];
         scope.kind = "";
@@ -85,10 +88,10 @@ angular.module("zooApp", [])
 
         scope.choose = function() {
             if (scope.kind === "Carnivores"){
-              scope.types = scope.serviceAnimals.getCarnivoresType();
+              scope.types = scope.zoo.getCarnivoresType();
             }
             else if (scope.kind === "Herbivorus"){
-              scope.types = scope.serviceAnimals.getHerbivorusType();
+              scope.types = scope.zoo.getHerbivorusType();
             }
         };
 
@@ -105,24 +108,18 @@ angular.module("zooApp", [])
             alert("Input please type animal!");
             return;
           }
-          if (scope.kind == "Carnivores") {
-            scope.serviceAnimals.addCarnivoresAnimal(scope.nameAnimal, scope.type)
-          }
-          else if (scope.kind == "Herbivorus") {
-            scope.serviceAnimals.addHerbivorusAnimal(scope.nameAnimal, scope.type)
-          }
-          var message = scope.nameAnimal + MessageAnimal.BIRTH;
-          scope.chat.addMessage(message);
+          scope.zoo.addAnimal(scope.nameAnimal, scope.type);
+          scope.chat.addMessage(scope.nameAnimal + MessageAnimal.BIRTH);
         };
       },
     templateUrl: 'views/administrationZoo.html'
   }
 }])
-.directive("animalChat", ["factory", function(factory) {
+.directive("animalChat", ["factoryZoo", "factoryChat", function(factoryZoo, factoryChat) {
   return {
     link: function(scope) {
-      scope.serviceAnimals = factory.serviceAnimals;
-      scope.chat = factory.chat;
+      scope.zoo = factoryZoo.zoo;
+      scope.chat = factoryChat.chat;
     },
     templateUrl: 'views/chat.html'
   };

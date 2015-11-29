@@ -6,8 +6,8 @@
       <th class="danger"></th>
       <th class="danger"></th>
     </tr>
-    <tr ng-repeat="animal in serviceAnimals.getCarnivoresList()" class="info">
-      <td>{{animal.getName()}}({{animal.getName()}})</td>
+    <tr ng-repeat="animal in zoo.getCarnivoresList()" class="info">
+      <td>{{animal.getName()}}({{animal.getType()}})</td>
       <td><button class="btn btn-info" ng-click="killAnimalCarnivores(animal);">Kill</button></td>
       <td><button class="btn btn-primary" ng-click="food(animal);">Food</button></td>
       <td><label>{{animal.getTimeIntervalAppetite() - animal.getTimeAppetiteCurrent()}}</label></td>
@@ -23,8 +23,8 @@
       <th class="success"></th>
       <th class="success"></th>
     </tr>
-    <tr ng-repeat="animal in serviceAnimals.getHerbivorusList()" class="info">
-      <td>{{animal.getName()}}</td>
+    <tr ng-repeat="animal in zoo.getHerbivorusList()" class="info">
+      <td>{{animal.getName()}}({{animal.getType()}})</td>
       <td><button class="btn btn-info" ng-click="killAnimalHerbivorus(animal);">Kill</button></td>
       <td><button class="btn btn-primary" ng-click="food(animal);">Food</button></td>
       <td><label>{{animal.getTimeIntervalAppetite() - animal.getTimeAppetiteCurrent()}}</label></td>

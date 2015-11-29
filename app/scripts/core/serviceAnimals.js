@@ -24,7 +24,7 @@ function Zoo(){
     animal.food();
   }
 
-  this.addCarnivoresAnimal = function(name, type){
+  this.addAnimal = function(name, type){
     switch (type) {
       case "Hedgehog":
         carnivoresList.push(new Hedgehog(name, 8, 12, "thhhhrr"));
@@ -32,13 +32,6 @@ function Zoo(){
       case "Gorynych":
         carnivoresList.push(new Dragon(name, 8, 12, "thhhhrr"));
         break;
-      default:
-        alert("ERROR addCarnivoresAnimal");
-    }
-  }
-
-  this.addHerbivorusAnimal = function(name, type){
-    switch (type) {
       case "Elephant":
         herbivorusList.push(new Elephant(name, 8, 12, "thhhhrr"));
         break;
@@ -46,7 +39,7 @@ function Zoo(){
         herbivorusList.push(new Deer(name, 8, 12, "thhhhrr"));
         break;
       default:
-        alert("ERROR addHerbivorusAnimal");
+        alert("ERROR addAnimal " + type);
     }
   }
 
@@ -80,6 +73,25 @@ function Zoo(){
 
   this.addAllHerbivorusList = function(list){
     herbivorusList = list;
+  }
+
+  this.removeAnimal = function(animal) {
+    if (animal.getKind() === "Carnivores"){
+      alert(animal.getKind());
+      for (var i = 0; i < carnivoresList.length; i++) {
+        if (carnivoresList[i] === animal)//==
+          carnivoresList.splice(i, 1);
+      }
+    }
+    else if (animal.getKind() === "Herbivorus"){
+      for (var i = 0; i < herbivorusList.length; i++) {
+        if (herbivorusList[i] === animal)//==
+          herbivorusList.splice(i, 1);
+      }
+    }
+    else {
+      alert("ERROR removeAnimal " + animal.getName());
+    }
   }
 
   this.removeAnimalCarnivores = function(animal){
