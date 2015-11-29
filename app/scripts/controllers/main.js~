@@ -1,0 +1,22 @@
+'use strict';
+
+/**
+ * @ngdoc function
+ * @name zooOfDoomApp.controller:MainCtrl
+ * @description
+ * # MainCtrl
+ * Controller of the zooOfDoomApp
+ */
+angular.module('zooOfDoomApp')
+  .controller('MainCtrl', function () {
+    this.awesomeThings = [
+      'HTML5 Boilerplate',
+      'AngularJS',
+      'Karma'
+    ];
+  });
+
+angular.module("mytodoApp")
+  .container("MainCtrl", function($scope){
+    $scope.todos = ["Item 1", "Item 2", Item 3"];
+  });

@@ -1,0 +1,23 @@
+<h1 class="page-header"><small>Administration Zoo</small></h1>
+<form class="navbar-form navbar-left">
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="input name animal" ng-model="nameAnimal">
+  </div>
+
+  <div class="form-group">
+    <label for="sel1">Select kind:</label>
+    <select class="form-control" ng-model="kind" ng-change="choose()">
+      <option>Carnivores</option>
+      <option>Herbivorus</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="sel1">Select kind:</label>
+    <select class="form-control" ng-model="type">
+      <option ng-repeat="t in types">{{t}}</option>
+    </select>
+  </div>
+
+  <button class="btn btn-default" ng-click="add()">Add</button>
+</form>

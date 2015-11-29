@@ -1,0 +1,4 @@
+<h1 class="page-header"><small>Chat animals</small></h1>
+<ul class="list-group">
+  <li class="list-group-item" ng-repeat="message in chat.getChat() track by $index">{{message}}</li>
+</ul>
