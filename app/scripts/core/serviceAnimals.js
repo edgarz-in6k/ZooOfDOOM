@@ -8,14 +8,11 @@ function Zoo(){
   var deer1 = new Deer("Tyller", 4, 18, "eeeer");
   var deer2 = new Deer("Kudy", 5, 18, "eeeer");
 
-  //var carnivoresList = [hedgehog1, hedgehog2, dragon];
   var carnivoresType = ["Hedgehog", "Dragon"];
 
-  //var herbivorusList = [elephant1, elephant2, deer1, deer2];
   var herbivorusType  = ["Elephant", "Deer"];
 
   list = [hedgehog1, hedgehog2, dragon, elephant1, elephant2, deer1, deer2];
-  //var types = ["Hedgehog", "Dragon", "Elephant", "Deer"];
 
   this.isCorpse = function(animal){
       if (animal.getTimeAppetiteCurrent() >= animal.getTimeIntervalAppetite())
@@ -64,6 +61,10 @@ function Zoo(){
     return list.filter(function(animal){
       return animal.getKind() == "Herbivorus";
     });
+  }
+
+  this.getList = function(){
+    return list;
   }
 
   this.removeAnimal = function(animal) {

@@ -1,33 +1,21 @@
-<div class="col-md-6">
   <table class="table table-hover">
     <tr>
-      <th class="danger">Carnivores animals:</th>
-      <th class="danger"></th>
-      <th class="danger"></th>
-      <th class="danger"></th>
+      <th class="{{backgroundColor}}">{{title}}</th>
+      <th class="{{backgroundColor}}"></th>
+      <th class="{{backgroundColor}}"></th>
+      <th class="{{backgroundColor}}"></th>
     </tr>
-    <tr ng-repeat="animal in zoo.getCarnivoresList()" class="info">
-      <td>{{animal.getName()}}({{animal.getType()}})</td>
-      <td><button class="btn btn-info" ng-click="killAnimal(animal);">Kill</button></td>
-      <td><button class="btn btn-primary" ng-click="food(animal);">Food</button></td>
-      <td><label>{{animal.getStatusOfHunger()}}</label></td>
-    </tr>
-  </table>
-</div>
 
-<div class="col-md-6">
-  <table class="table table-hover">
-    <tr>
-      <th class="success">Herbivorus animals:</th>
-      <th class="success"></th>
-      <th class="success"></th>
-      <th class="success"></th>
-    </tr>
-    <tr ng-repeat="animal in zoo.getHerbivorusList()" class="info">
+    <div ng-if="getList == 'carnivores'">
+        <tr ng-repeat="animal in zoo.getCarnivoresList() track by $index" class="info">
+    </div>
+    <div ng-if="getList == 'herbivorus'">
+        <tr ng-repeat="animal in zoo.getHerbivorusList() track by $index" class="info">
+    </div>
+
       <td>{{animal.getName()}}({{animal.getType()}})</td>
       <td><button class="btn btn-info" ng-click="killAnimal(animal);">Kill</button></td>
       <td><button class="btn btn-primary" ng-click="food(animal);">Food</button></td>
       <td><label>{{animal.getStatusOfHunger()}}</label></td>
     </tr>
   </table>
-</div>
