@@ -10,7 +10,7 @@
       <td>{{animal.getName()}}({{animal.getType()}})</td>
       <td><button class="btn btn-info" ng-click="killAnimalCarnivores(animal);">Kill</button></td>
       <td><button class="btn btn-primary" ng-click="food(animal);">Food</button></td>
-      <td><label>{{animal.getTimeIntervalAppetite() - animal.getTimeAppetiteCurrent()}}</label></td>
+      <td><label>{{animal.getStatusOfHunger()}}</label></td>
     </tr>
   </table>
 </div>
@@ -27,7 +27,7 @@
       <td>{{animal.getName()}}({{animal.getType()}})</td>
       <td><button class="btn btn-info" ng-click="killAnimalHerbivorus(animal);">Kill</button></td>
       <td><button class="btn btn-primary" ng-click="food(animal);">Food</button></td>
-      <td><label>{{animal.getTimeIntervalAppetite() - animal.getTimeAppetiteCurrent()}}</label></td>
+      <td><label>{{animal.getStatusOfHunger()}}</label></td>
     </tr>
   </table>
 </div>

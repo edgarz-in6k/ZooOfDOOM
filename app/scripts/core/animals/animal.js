@@ -46,6 +46,9 @@ Animal.prototype.addTimeAppetiteCurrent = function() {
 Animal.prototype.food = function() {
   this._timeAppetiteCurrent = 0;
 }
+Animal.prototype.getStatusOfHunger = function() {
+  return this.getTimeIntervalAppetite() - this.getTimeAppetiteCurrent();
+}
 
 Animal.prototype.getVoice = function() {
   return this._voice;
