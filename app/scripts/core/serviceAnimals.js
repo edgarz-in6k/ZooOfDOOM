@@ -3,16 +3,19 @@ function Zoo(){
   var hedgehog2 = new Hedgehog("George", 14, 12, "thhhhrr");
   var dragon = new Dragon("Gorynych", 7, 18, "HA HA HA");
 
-  var carnivoresList = [hedgehog1, hedgehog2, dragon];
-  var carnivoresType = ["Hedgehog", "Dragon"];
-
   var elephant1 = new Elephant("Bob", 8, 12, "uuuuu");
   var elephant2 = new Elephant("Karl", 12, 12, "uuuuu");
   var deer1 = new Deer("Tyller", 4, 18, "eeeer");
   var deer2 = new Deer("Kudy", 5, 18, "eeeer");
 
-  var herbivorusList = [elephant1, elephant2, deer1, deer2];
+  //var carnivoresList = [hedgehog1, hedgehog2, dragon];
+  var carnivoresType = ["Hedgehog", "Dragon"];
+
+  //var herbivorusList = [elephant1, elephant2, deer1, deer2];
   var herbivorusType  = ["Elephant", "Deer"];
+
+  list = [hedgehog1, hedgehog2, dragon, elephant1, elephant2, deer1, deer2];
+  //var types = ["Hedgehog", "Dragon", "Elephant", "Deer"];
 
   this.isCorpse = function(animal){
       if (animal.getTimeAppetiteCurrent() >= animal.getTimeIntervalAppetite())
@@ -27,16 +30,16 @@ function Zoo(){
   this.addAnimal = function(name, type){
     switch (type) {
       case "Hedgehog":
-        carnivoresList.push(new Hedgehog(name, 8, 12, "thhhhrr"));
+        list.push(new Hedgehog(name, 8, 12, "thhhhrr"));
         break;
       case "Gorynych":
-        carnivoresList.push(new Dragon(name, 8, 12, "thhhhrr"));
+        list.push(new Dragon(name, 8, 12, "thhhhrr"));
         break;
       case "Elephant":
-        herbivorusList.push(new Elephant(name, 8, 12, "thhhhrr"));
+        list.push(new Elephant(name, 8, 12, "thhhhrr"));
         break;
       case "Deer":
-        herbivorusList.push(new Deer(name, 8, 12, "thhhhrr"));
+        list.push(new Deer(name, 8, 12, "thhhhrr"));
         break;
       default:
         alert("ERROR addAnimal " + type);
@@ -44,52 +47,29 @@ function Zoo(){
   }
 
   this.getCarnivoresType = function(){
-    return carnivoresType;
+    return carnivoresType;//types
   }
 
   this.getHerbivorusType = function(){
-    return herbivorusType;
+    return herbivorusType;//types
   }
 
   this.getCarnivoresList = function(){
-    return carnivoresList;
-  }
-
-  this.getAnimalCarnivores = function(index){
-    return carnivoresList[index];
+    return list.filter(function(animal){
+      return animal.getKind() == "Carnivores";
+    });
   }
 
   this.getHerbivorusList = function(){
-    return herbivorusList;
-  }
-
-  this.getAnimalHerbivorus = function(index){
-    return herbivorusList[index];
-  }
-
-  this.addAllCarnivoresList = function(list){
-    carnivoresList = list;
-  }
-
-  this.addAllHerbivorusList = function(list){
-    herbivorusList = list;
+    return list.filter(function(animal){
+      return animal.getKind() == "Herbivorus";
+    });
   }
 
   this.removeAnimal = function(animal) {
-    if (animal.getKind() === "Carnivores"){
-      for (var i = 0; i < carnivoresList.length; i++) {
-        if (carnivoresList[i] === animal)//==
-          carnivoresList.splice(i, 1);
-      }
-    }
-    else if (animal.getKind() === "Herbivorus"){
-      for (var i = 0; i < herbivorusList.length; i++) {
-        if (herbivorusList[i] === animal)//==
-          herbivorusList.splice(i, 1);
-      }
-    }
-    else {
-      alert("ERROR removeAnimal " + animal.getName());
+    for (var i = 0; i < list.length; i++) {
+      if (list[i] === animal)//==
+        list.splice(i, 1);
     }
   }
 }
