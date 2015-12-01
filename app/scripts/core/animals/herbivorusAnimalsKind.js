@@ -1,17 +1,13 @@
-function Hedgehog(){
+function Elephant(){
   Animal.apply(this, arguments);
 }
-Hedgehog.prototype = Object.create(Herbivorus.prototype);
-Hedgehog.prototype.constructor = Hedgehog;
-Hedgehog.prototype._type = "Hedgehog";
+Elephant.prototype = Object.create(Herbivorus.prototype);
+Elephant.prototype.constructor = Elephant;
+Elephant.prototype._type = "Elephant";
 
-function Dragon(){
+function Deer(){
   Animal.apply(this, arguments);
 }
-Dragon.prototype = Object.create(Herbivorus.prototype);
-Dragon.prototype.constructor = Dragon;
-Dragon.prototype._type = "Dragon";
-
-Dragon.prototype.eat = function() {
-
-}
+Deer.prototype = Object.create(Herbivorus.prototype);
+Deer.prototype.constructor = Deer;
+Deer.prototype._type = "Deer";
