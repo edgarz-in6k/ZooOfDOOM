@@ -77,7 +77,6 @@ function Zoo(){
 
   this.removeAnimal = function(animal) {
     if (animal.getKind() === "Carnivores"){
-      alert(animal.getKind());
       for (var i = 0; i < carnivoresList.length; i++) {
         if (carnivoresList[i] === animal)//==
           carnivoresList.splice(i, 1);
@@ -91,20 +90,6 @@ function Zoo(){
     }
     else {
       alert("ERROR removeAnimal " + animal.getName());
-    }
-  }
-
-  this.removeAnimalCarnivores = function(animal){
-    for (var i = 0; i < carnivoresList.length; i++) {
-      if (carnivoresList[i] === animal)//==
-        carnivoresList.splice(i, 1);
-    }
-  }
-
-  this.removeAnimalHerbivorus = function(animal){
-    for (var i = 0; i < herbivorusList.length; i++) {
-      if (herbivorusList[i] === animal)//==
-        herbivorusList.splice(i, 1);
     }
   }
 }

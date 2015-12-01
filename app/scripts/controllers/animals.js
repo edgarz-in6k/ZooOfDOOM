@@ -24,26 +24,12 @@ angular.module("zooApp", [])
         scope.zoo = factoryZoo.zoo;
         scope.chat = factoryChat.chat;
 
-        scope.killAnimalCarnivores = function(animal) {
+        scope.killAnimal = function(animal) {
           var message = animal.getName() + MessageAnimal.KILL;
           scope.chat.addMessage(message);
 
-          scope.deadAnimalCarnivores(animal);
+          scope.zoo.removeAnimal(animal);
         };
-        scope.killAnimalHerbivorus = function(animal) {
-          var message = animal.getName() + ": No! You kill me!";
-          scope.chat.addMessage(message);
-
-          scope.deadAnimalHerbivorus(animal);
-        };
-
-        scope.deadAnimalCarnivores = function(animal) {
-          scope.zoo.removeAnimalCarnivores(animal);
-        }
-
-        scope.deadAnimalHerbivorus = function(animal) {
-          scope.zoo.removeAnimalHerbivorus(animal);
-        }
 
         scope.food = function(animal){
           var message = animal.getName() + MessageAnimal.FOOD;
@@ -58,7 +44,8 @@ angular.module("zooApp", [])
             if (scope.zoo.isCorpse(animal)){
               var message = animal.getName() + MessageAnimal.DIED_STARVATION;
               scope.chat.addMessage(message);
-              scope.deadAnimalCarnivores(animal);
+
+              scope.zoo.removeAnimal(animal);
             }
           }
           for (animal of scope.zoo.getHerbivorusList()) {
@@ -66,7 +53,8 @@ angular.module("zooApp", [])
             if (scope.zoo.isCorpse(animal)){
               var message = animal.getName() + MessageAnimal.DIED_STARVATION;
               scope.chat.addMessage(message);
-              scope.deadAnimalHerbivorus(animal);
+
+              scope.zoo.removeAnimal(animal);
             }
           }
         }, 1000);
